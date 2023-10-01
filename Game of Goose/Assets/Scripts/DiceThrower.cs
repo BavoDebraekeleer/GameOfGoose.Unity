@@ -38,8 +38,8 @@ public class DiceThrower : MonoBehaviour
             {
                 Dice dice = Instantiate(_dice, transform.position, transform.rotation);
                 _spawnedDice.Add(dice.gameObject);
-                Debug.Log($"Dice {dice.DiceId} spawned.");
-                dice.RollDice(_throwForce, _rollForce, i);
+                int diceId = i + 1;
+                dice.RollDice(_throwForce, _rollForce, diceId);
                 await Task.Yield(); // Wait a frame and do the next iteration of the loop.
             }
         }

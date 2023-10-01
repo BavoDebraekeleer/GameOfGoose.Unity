@@ -31,7 +31,7 @@ public class Dice : MonoBehaviour
         {
             if (_isRolling && _rigidbody.velocity.sqrMagnitude == 0f)
             {
-                _isRolling = true;
+                _isRolling = false;
                 GetDiceTopFace();
             }
         }
@@ -58,7 +58,7 @@ public class Dice : MonoBehaviour
                 }
             }
             topFace++; // Index starts at 0 for face 1, so + 1.
-            Debug.Log($"Dice {DiceId} top facer is {topFace}");
+            Debug.Log($"Dice {DiceId} top face is {topFace}");
             OnDiceResult?.Invoke(DiceId, topFace);
             return topFace;
         }
@@ -67,11 +67,11 @@ public class Dice : MonoBehaviour
 
     public void RollDice(float throwForce, float rollForce, int diceId)
     {
-        Debug.Log($"Dice {DiceId} rolled.");
         DiceId = diceId;
+        _isRolling = true;
 
         // Throw
-        float randomVariance = UnityEngine.Random.Range(-1f, 1f);
+        float randomVariance = UnityEngine.Random.Range(-0.5f, 0.5f);
         _rigidbody.AddForce(transform.forward * (throwForce + randomVariance), ForceMode.Impulse);
 
         // Roll/Twist
